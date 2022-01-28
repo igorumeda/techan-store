@@ -1,0 +1,23 @@
+.titulo {
+    @apply
+        p-5
+        flex
+        flex-row
+        justify-start
+        items-center
+    ;
+}
+
+.titulo svg {
+    @apply
+        text-slate-700
+        mr-4
+    ;
+}
+
+.titulo h1 {
+    @apply
+        text-3xl
+        text-slate-700
+    ;
+}

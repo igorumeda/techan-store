@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  @apply bg-slate-500;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  @apply
+  bg-slate-100
+    flex
+    flex-col
+    mx-auto
+    max-w-7xl
+    md:flex-row
+  ;
+}
+
+@media screen and (min-width: 1366px) {
+  main {
+    height: 100vh;
+    overflow: auto;
+    border-radius: 10px;
+  }
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+:root {
+  --color-primary: #045375;
+}
+
+

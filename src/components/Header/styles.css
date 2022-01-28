@@ -1,0 +1,276 @@
+
+.cabecalho {
+@apply
+    bg-slate-700 
+    w-3/4
+    h-screen
+    flex
+    flex-col
+    justify-between
+    fixed
+    overflow-y-auto
+    z-50
+    right-0
+    transition-none
+    shadow-md
+    md:w-60
+    md:flex
+    md:flex-col
+    md:justify-between
+    md:fixed
+    md:left-0
+    md:visible
+    md:shadow-none
+;
+}
+
+.cabecalhoVisible {
+@apply
+    right-0
+    visible
+    transition-all
+    md:left-0
+    md:transition-none
+;
+}
+
+.cabecalhoInvisible {
+@apply
+    -right-full
+    invisible
+    transition-all
+    md:left-0
+    md:visible
+    md:transition-none
+;
+}
+
+.cabecalho .logo {
+@apply
+    w-full
+    h-14
+    hidden
+    md:flex
+    md:flex-row
+    md:justify-center
+    md:items-center
+    bg-slate-900
+;
+}
+
+.cabecalho .logo img {
+width: 100px;
+margin-right: 5px;
+}
+
+
+.cabecalho .logo h2 {
+color:white;
+font-weight: bold;
+font-size: 11px;
+background-color: var(--color-primary);
+border-radius: 4px;
+padding: 3px 5px 1px 5px;
+box-shadow: 1px 1px 2px black;
+}
+
+.cabecalho .backMenuMobile {
+@apply
+    flex
+    md:hidden
+;
+}
+
+.cabecalho .backMenuMobile button {
+@apply
+    p-3
+;
+}
+
+.cabecalho .perfil {
+@apply
+    flex 
+    flex-col 
+    items-center
+    border-b
+    border-b-gray-500
+    w-full
+    pb-4
+;
+}
+
+.cabecalho .perfil img {
+@apply
+    rounded-full 
+    w-28
+    mt-3
+    border-2 
+    border-slate-600 
+;
+}
+
+.cabecalho .perfil h3 {
+@apply
+    text-gray-300 
+    mt-3
+    text-base
+    font-semibold
+;
+}
+
+.cabecalho .perfil a {
+@apply
+    text-gray-100
+    flex
+    items-center
+;
+font-size: 12px;
+}
+
+.cabecalho .perfil a svg {
+margin-right: 5px;
+}
+
+.cabecalho .menu h2 {
+@apply
+    text-slate-300
+    text-lg
+;
+font-weight: bold;
+padding: 10px;
+
+}
+
+.cabecalho .menu ul li {
+    @apply
+        cursor-pointer
+        hover:bg-slate-600
+        text-slate-400
+        transition
+    ;
+}
+
+.cabecalho .menu ul li.active {
+    @apply 
+        bg-slate-600
+    ;
+}
+
+.cabecalho .menu ul li a {
+    @apply
+        w-full
+        h-full
+        p-3
+        flex
+        items-center
+    ; 
+}
+
+.cabecalho .menu ul li button {
+    @apply
+        w-full
+        h-full
+        p-3
+        flex
+        items-center
+    ; 
+}
+
+.cabecalho .menu ul li svg {
+@apply
+    mr-3
+    text-slate-400
+;
+}
+
+.cabecalho .copyright {
+    @apply
+        w-full
+        flex
+        flex-col
+        items-center
+        text-slate-400
+        text-sm
+        p-2
+    ;
+}
+
+.cabecalho .copyright img {
+width: 25px;
+margin-bottom: 5px;
+}
+
+.cabecalho .copyright p {
+@apply
+    flex
+    items-center
+;
+}
+
+.cabecalhoMobile {
+@apply
+    w-full
+    h-14
+    fixed
+    top-0
+    flex
+    flex-row
+    justify-between
+bg-slate-900
+    shadow-md
+    md:hidden
+;
+}
+
+.cabecalhoMobile .logo {
+@apply
+    flex
+    flex-row
+    justify-center
+    items-center
+    px-4
+;
+}
+
+.cabecalhoMobile .logo img {
+width: 100px;
+margin-right: 5px;
+}
+
+
+.cabecalhoMobile .logo h2 {
+color:white;
+font-weight: bold;
+font-size: 11px;
+background-color: var(--color-primary);
+border-radius: 4px;
+padding: 3px 5px 1px 5px;
+box-shadow: 1px 1px 2px black;
+}
+
+.cabecalhoMobile .menuMobile {
+@apply
+    bg-slate-700
+    flex
+    items-center
+;
+}
+
+.cabecalhoMobile .menuMobile button {
+@apply
+    p-4
+;
+}
+
+.shadowScreen {
+@apply
+    fixed
+    w-full
+    h-full
+    bg-black
+    opacity-60
+    z-40
+;
+}
+
+
