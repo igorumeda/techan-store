@@ -1,7 +1,11 @@
+import Title from '../../components/Title'
+
 import './styles.css'
 
 export default function Usuarios(){
     return(
-        <h1>Usuarios</h1>
+        <div>
+            <Title titulo="Usuarios" />
+        </div>
     )
 }

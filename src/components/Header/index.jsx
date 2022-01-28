@@ -45,25 +45,25 @@ export default function Header(){
                         <h2>Menu</h2>
 
                         <ul>
-                            <li className={ currentPage === 'PaginaInicial' && 'active' }>
+                            <li className={ currentPage === 'PaginaInicial' ? 'active' : '' }>
                                 <Link to={'/'} onClick={()=>{ setCurrentPage('PaginaInicial'); setStatusMenu(false); }} >
                                     <MdHomeFilled size={20}/> 
                                     Página inicial
                                 </Link>
                             </li>
-                            <li className={ currentPage === 'Movimentacoes' && 'active' }>
+                            <li className={ currentPage === 'Movimentacoes' ? 'active' : '' }>
                                 <Link to={'/movimentacoes'} onClick={()=>{ setCurrentPage('Movimentacoes'); setStatusMenu(false); }}>
                                     <MdCompareArrows size={20} />
                                     Movimentações
                                 </Link>
                             </li>
-                            <li className={ currentPage === 'Clientes' && 'active' }>
+                            <li className={ currentPage === 'Clientes' ? 'active' : '' }>
                                 <Link to={'/clientes'} onClick={()=>{ setCurrentPage('Clientes'); setStatusMenu(false); }}>
                                     <MdGroup size={20} />
                                     Clientes
                                 </Link>
                             </li>
-                            <li className={ currentPage === 'Usuarios' && 'active' }>
+                            <li className={ currentPage === 'Usuarios' ? 'active' : '' }>
                                 <Link to={'/usuarios'} onClick={()=>{ setCurrentPage('Usuarios'); setStatusMenu(false); }}>
                                     <MdSupervisedUserCircle size={20} /> 
                                     Usuários

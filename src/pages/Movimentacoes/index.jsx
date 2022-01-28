@@ -1,7 +1,11 @@
+import Title from '../../components/Title'
+
 import './styles.css'
 
 export default function Movimentacoes(){
     return(
-        <h1>Movimentações</h1>
+        <div>
+            <Title titulo="Movimentações" />
+        </div>
     )
 }
