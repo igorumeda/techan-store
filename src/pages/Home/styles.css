@@ -2,6 +2,7 @@
     @apply
         flex 
         flex-row
+        items-start
         flex-wrap
     ;
 }
@@ -55,10 +56,61 @@
     ;  
 }
 
+.home .destaques .top h3 {
+    @apply
+        flex-1
+        text-left
+        text-xl
+        text-gray-600
+        mt-2
+    ;
+}
+
 .home .destaques span {
     @apply
         text-gray-500
         text-sm
         mt-3
+    ;
+}
+
+.home .destaques .bot table{
+    @apply
+        w-full
+    ;
+}
+
+.home .destaques .bot table tr {
+    @apply
+        flex
+        flex-row
+        border-t
+    ;
+}
+
+.home .destaques .bot table thead tr:first-child{
+    @apply
+        border-none
+    ;
+}
+
+.home .destaques .bot table tr.titleTable {
+    @apply
+        font-bold
+    ;
+}
+
+.home .destaques .bot table tr td{
+    @apply
+        p-3
+        flex
+        flex-row
+        items-center
+    ;
+}
+
+.home .destaques .bot table tr td:last-child{
+    @apply
+        justify-end
     ;
 }

@@ -1,4 +1,5 @@
-import { MdToday, MdViewWeek, MdCalendarViewMonth, MdCalendarToday } from "react-icons/md"
+import { MdToday, MdViewWeek, MdCalendarViewMonth, MdCalendarToday, MdArrowUpward, MdArrowDownward, MdSwapVert } from "react-icons/md"
+import { FcMoneyTransfer } from 'react-icons/fc'
 
 import Title from "../../components/Title"
 
@@ -72,10 +73,43 @@ export default function Home(){
 
                 </div>
 
-            </div>
+                <div className="destaques box">
 
-            <div className="contentData">
-                
+                    <div className="top">
+                        <div className="icon bg-green-600">
+                            <MdSwapVert size={40} />
+                        </div>
+                        <h3>Últimos lançamentos</h3>
+                    </div>
+
+                    <hr />
+
+                    <div className="bot">
+
+                        <table>
+                            <thead>
+                                <tr className="titleTable">
+                                    <td className="w-1/12"></td>
+                                    <td className="w-9/12">Movimento</td>
+                                    <td className="w-2/12">Valor</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td className="w-1/12"><div><FcMoneyTransfer size={20} /></div></td>
+                                    <td className="w-9/12">Entrada</td>
+                                    <td className="w-2/12">
+                                        <div><MdArrowUpward size={15} color="green" /></div>
+                                        <i className="text-green-600">100,00</i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
