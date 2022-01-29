@@ -18,10 +18,10 @@
     md:flex-col
     md:justify-between
     md:fixed
-    xl:relative
     md:left-0
     md:visible
     md:shadow-none
+    xl:relative
 ;
 }
 

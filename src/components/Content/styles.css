@@ -1,32 +1,14 @@
 
 .conteudo {
     @apply
-      ml-0
+      w-full
+      mx-0
       mt-14
       min-h-screen
       md:ml-60
       md:mt-0
       xl:ml-0
+      xl:overflow-y-auto
     ;
-    width: calc(100vw - 15rem);
-}
-
-.conteudo .contentData {
-  @apply
-    w-screen
-    p-3
-    md:w-full
-  ;
-}
-
-.conteudo .contentData .box {
-  @apply
-    bg-white
-    m-3
-    py-3
-    px-4
-    rounded-lg
-    shadow
-  ;
 }
   

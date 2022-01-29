@@ -1,25 +1,62 @@
-{
-    "data":
-    [
-        {
-            "movimento": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            "valor": "100,00",
-            "tipo": 0
-        },
-        {
-            "movimento": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45",
-            "valor": "200,00",
-            "tipo": 1
-        },
-        {
-            "movimento": "There are many variations",
-            "valor": "300,00",
-            "tipo": 0
-        },
-        {
-            "movimento": "Content here",
-            "valor": "400,00",
-            "tipo": 1
-        }
-    ]
-}
+[
+    {
+        "cdEntidade": 1,
+        "codigo": 1,
+        "dtCreated": null,
+        "dtModified": null,
+        "nuCpfCnpj": "52478818000",
+        "dsNomePrincipal": "João",
+        "dsNomeFantasia": null,
+        "dsEmail": "joao@email.com",
+        "nuTelefone": "(81) 99999.9999",
+        "nuCelular": null,
+        "flWhatsapp": null,
+        "nuCep": null,
+        "dsEndereco": null,
+        "dsBairro": null,
+        "dsCidade": null,
+        "dsUf": null,
+        "dsComplemento": null,
+        "imagem": null
+    },
+    {
+        "cdEntidade": 1,
+        "codigo": 2,
+        "dtCreated": null,
+        "dtModified": null,
+        "nuCpfCnpj": "98333611028",
+        "dsNomePrincipal": "Pedro",
+        "dsNomeFantasia": null,
+        "dsEmail": "pedro@email.com",
+        "nuTelefone": "(81) 99999.9999",
+        "nuCelular": null,
+        "flWhatsapp": null,
+        "nuCep": null,
+        "dsEndereco": null,
+        "dsBairro": null,
+        "dsCidade": null,
+        "dsUf": null,
+        "dsComplemento": null,
+        "imagem": null
+    },
+    {
+        "cdEntidade": 1,
+        "codigo": 3,
+        "dtCreated": null,
+        "dtModified": null,
+        "nuCpfCnpj": "92569037095",
+        "dsNomePrincipal": "Synara",
+        "dsNomeFantasia": null,
+        "dsEmail": "synara@email.com",
+        "nuTelefone": "(81) 99999.9999",
+        "nuCelular": null,
+        "flWhatsapp": null,
+        "nuCep": null,
+        "dsEndereco": null,
+        "dsBairro": null,
+        "dsCidade": null,
+        "dsUf": null,
+        "dsComplemento": null,
+        "imagem": null
+    }
+]

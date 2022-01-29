@@ -15,26 +15,19 @@ body {
   @apply bg-slate-500;
   margin: 0;
   background: url('../assets/bg.png') repeat;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 main {
-  @apply
-  bg-slate-200
-    flex
-    flex-col
-    md:w-screen
-    md:max-w-7xl
-    md:flex-row
-    md:mx-auto
-    ;
+  @apply bg-slate-200 flex flex-col relative md:w-screen md:max-w-7xl md:flex-row md:mx-auto;
 }
 
 @media screen and (min-width: 80rem) {
   main {
     height: 100vh;
-    overflow: auto;
+    overflow: hidden;
     border-radius: 20px;
     box-shadow: 0 2px 10px rgb(31, 42, 56);
   }
@@ -50,6 +43,163 @@ code {
 
 :root {
   --color-primary: #045375;
+}
+
+
+
+
+
+
+.contentData {
+  @apply w-full p-3;
+}
+
+.contentData .box {
+  @apply bg-white m-3 py-3 px-4 rounded-lg shadow;
+}
+
+.contentData .box h1 {
+  @apply text-xl mx-2 my-3 font-bold text-slate-600
+}
+
+.contentData .boxClean {
+  @apply block m-3;
+}
+
+
+
+
+
+input[type='text'],
+textarea {
+  @apply py-2 px-3 text-gray-700 border rounded;
+}
+
+
+
+
+a.btn,
+button.btn {
+  @apply inline-block py-2 px-3 rounded text-slate-100 bg-slate-700 hover:opacity-90;
+}
+
+a.btn-success,
+button.btn-success {
+  @apply inline-block py-2 px-3 rounded text-slate-100 bg-green-700 hover:opacity-90;
+}
+
+a.btn-new,
+button.btn-new {
+  @apply inline-block py-2 px-3 rounded text-slate-100 bg-blue-700 hover:opacity-90;
+}
+
+a.btn-edit,
+button.btn-edit {
+  @apply inline-block py-2 px-3 rounded text-slate-100 bg-yellow-600 hover:opacity-90;
+}
+
+a.btn-delete,
+button.btn-delete {
+  @apply inline-block py-2 px-3 rounded text-slate-100 bg-red-700 hover:opacity-90;
+}
+
+a.btn-back,
+button.btn-back {
+  @apply inline-block p-2;
+}
+
+a.btn-back *,
+button.btn-back * {
+  @apply inline-block;
+}
+
+
+
+
+
+table {
+  @apply w-full md:text-left;
+}
+
+table thead {
+  @apply hidden md:table-header-group; 
+}
+
+table tbody tr:nth-child(even) {
+  @apply bg-slate-100 rounded-xl md:bg-transparent md:rounded-none;
+}
+
+table tr th,
+table tr td {
+  @apply p-3;
+}
+
+table tr th {
+  @apply border-b border-b-slate-400;
+}
+
+table tr th.center,
+table tr td.center {
+  text-align: center;
+}
+
+table tr th.right,
+table tr td.right {
+  text-align: right;
+}
+
+table tbody {
+  @apply w-full;
+}
+
+table tbody tr {
+  @apply flex flex-col items-end pb-5 mb-5 md:border-b md:table-row;
+}
+
+table tbody tr:last-child {
+  @apply border-none;
+}
+
+table tbody tr td {
+  @apply border-b md:border-none;
+}
+
+table tbody tr td:last-child {
+  @apply border-none
+}
+
+@media (max-width: 768px) {
+  
+  table tbody tr td {
+    @apply w-full text-right;
+  }
+
+  table tbody tr td::before {
+    content: attr(data-label);
+    @apply float-left font-bold;
+  }
+
+}
+
+
+
+
+
+
+form.formFlex {
+  @apply flex flex-col justify-start items-stretch md:items-start
+}
+
+form.formFlex label {
+  @apply block text-slate-600 mt-3;
+}
+
+form.formFlex label:first-child {
+  @apply m-0;
+}
+
+form.formFlex input {
+  @apply flex-1;
 }
 
 

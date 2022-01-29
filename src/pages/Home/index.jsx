@@ -89,17 +89,19 @@ export default function Home(){
                         <table>
                             <thead>
                                 <tr className="titleTable">
-                                    <td className="w-1/12"></td>
-                                    <td className="w-9/12">Movimento</td>
-                                    <td className="w-2/12">Valor</td>
+                                    <th className="md:w-1/12"></th>
+                                    <th className="md:w-9/12">Movimento</th>
+                                    <th className="md:w-2/12 valor">Valor</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td className="w-1/12"><div><FcMoneyTransfer size={20} /></div></td>
-                                    <td className="w-9/12">Entrada</td>
-                                    <td className="w-2/12">
-                                        <div><MdArrowUpward size={15} color="green" /></div>
+                                    <td className="md:w-1/12" data-label="#">
+                                        <div className="inline-block"><FcMoneyTransfer size={20} /></div>
+                                    </td>
+                                    <td className="md:w-9/12" data-label="Movimento">Entrada</td>
+                                    <td className="md:w-2/12 valor" data-label="Valor">
+                                        <div className="inline-block"><MdArrowUpward size={15} color="green" /></div>
                                         <i className="text-green-600">100,00</i>
                                     </td>
                                 </tr>

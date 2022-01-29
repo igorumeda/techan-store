@@ -1,0 +1,12 @@
+.contentData .filtro {
+    @apply
+        flex
+        items-center
+    ;
+}
+
+.contentData .filtro input {
+    @apply
+        w-full
+    ;
+}
