@@ -5,27 +5,33 @@ import { removeAcentos } from '../../services/global'
 import { MdSearch, MdEdit, MdDelete } from 'react-icons/md'
 
 import Title from '../../components/Title'
+import Loading from '../../components/Controls/Loading'
 
 import './styles.css'
 import { Link } from 'react-router-dom';
 
 export default function Clientes(){
 
+    const [loading, setLoading] = useState(false);
     const [listaOriginal, setListaOriginal] = useState([]);
     const [lista, setLista] = useState([]);
 
     useEffect(()=>{
 
         async function carrega(){
+
+            setLoading(true);
     
             await api.get('/cliente')
                 .then(item => {
                     setListaOriginal(item.data);
                     setLista(item.data);
+                    setLoading(false);
                 })
                 .catch(err => {
                     console.log(err);
                     toast.error('Algo deu errado');
+                    setLoading(false);
                 })
     
         }
@@ -81,7 +87,7 @@ export default function Clientes(){
 
                     <h1>Lista de clientes</h1>
 
-                    <table>
+                    <table className='table-list'>
                         <thead>
                             <tr>
                                 <th className=''>CPF/CNPJ</th>
@@ -118,6 +124,7 @@ export default function Clientes(){
                             })}
                         </tbody>
                     </table>
+                    {loading ? <Loading /> : ''}
                 </div>
 
             </div>

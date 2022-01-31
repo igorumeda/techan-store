@@ -72,7 +72,7 @@ code {
 
 input[type='text'],
 textarea {
-  @apply py-2 px-3 text-gray-700 border rounded;
+  @apply py-2 px-3 text-gray-700 border border-gray-300 hover:border-slate-400 rounded;
 }
 
 
@@ -113,68 +113,73 @@ button.btn-back * {
   @apply inline-block;
 }
 
+a.btn-close,
+button.btn-close {
+  @apply p-2 rounded-lg transition-all hover:bg-slate-100 hover:bg-opacity-20;
+}
 
 
 
 
-table {
+
+table.table-list {
   @apply w-full md:text-left;
 }
 
-table thead {
+table.table-list thead {
   @apply hidden md:table-header-group; 
 }
 
-table tbody tr:nth-child(even) {
+table.table-list tbody tr:nth-child(even) {
   @apply bg-slate-100 rounded-xl md:bg-transparent md:rounded-none;
 }
 
-table tr th,
-table tr td {
+table.table-list tr th,
+table.table-list tr td {
   @apply p-3;
 }
 
-table tr th {
+table.table-list tr th {
   @apply border-b border-b-slate-400;
 }
 
-table tr th.center,
-table tr td.center {
+table.table-list tr th.center,
+table.table-list tr td.center {
   text-align: center;
 }
 
-table tr th.right,
-table tr td.right {
+table.table-list tr th.right,
+table.table-list tr td.right {
   text-align: right;
 }
 
-table tbody {
+table.table-list tbody {
   @apply w-full;
 }
 
-table tbody tr {
+table.table-list tbody tr {
   @apply flex flex-col items-end pb-5 mb-5 md:border-b md:table-row;
 }
 
-table tbody tr:last-child {
+table.table-list tbody tr:last-child {
   @apply border-none;
 }
 
-table tbody tr td {
+table.table-list tbody tr td {
   @apply border-b md:border-none;
 }
 
-table tbody tr td:last-child {
+table.table-list tbody tr td:last-child {
   @apply border-none
 }
 
 @media (max-width: 768px) {
   
-  table tbody tr td {
+  table.table-list tbody tr td {
     @apply w-full text-right;
   }
 
-  table tbody tr td::before {
+  table.table-list tbody tr td::before {
     content: attr(data-label);
     @apply float-left font-bold;
   }
@@ -184,22 +189,32 @@ table tbody tr td:last-child {
 
 
 
-
-
-form.formFlex {
-  @apply flex flex-col justify-start items-stretch md:items-start
+table.table-form {
+  @apply w-full mb-3;
 }
 
-form.formFlex label {
-  @apply block text-slate-600 mt-3;
+table.table-form tbody tr {
+  @apply flex flex-col md:table-row
 }
 
-form.formFlex label:first-child {
-  @apply m-0;
+table.table-form tbody tr td {
+  @apply p-3;
 }
 
-form.formFlex input {
-  @apply flex-1;
+table.table-form tbody tr td label,
+table.table-form tbody tr td input {
+    @apply block w-full;
 }
+
+table.table-form tbody tr td label {
+  height: 26px;
+}
+
+table.table-form tbody tr td div {
+  height: 42px;
+  display: flex;
+  align-items: center;
+}
+
 
 

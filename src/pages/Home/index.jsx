@@ -86,7 +86,7 @@ export default function Home(){
 
                     <div className="bot">
 
-                        <table>
+                        <table className="table-list">
                             <thead>
                                 <tr className="titleTable">
                                     <th className="md:w-1/12"></th>

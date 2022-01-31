@@ -1,0 +1,39 @@
+.confirm-shadow {
+    @apply w-screen h-screen fixed bg-opacity-40 bg-black top-0 left-0;
+    z-index: 99;
+}
+
+.confirm {
+    @apply rounded bg-white fixed shadow-lg border flex flex-col justify-between;
+    width: 500px;
+    min-height: 200px;
+    top: 50vh;
+    left: 50vw;
+    margin-top: -100px;
+    margin-left: -250px;
+    z-index: 99;
+}
+
+@media (max-width: 768px) {
+    .confirm {
+        width: 80vw;
+        margin-left: -40vw;
+    }
+}
+
+.confirm div {
+    @apply bg-slate-700 px-4 py-3 w-full m-0 rounded flex flex-row justify-between items-center;
+}
+
+.confirm div h1 {
+    @apply font-bold text-white text-xl;
+}
+
+.confirm p {
+    @apply px-4 py-3 text-lg;
+}
+
+.confirm span {
+    @apply p-4 border-t;
+}
+

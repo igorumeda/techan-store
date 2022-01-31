@@ -18,13 +18,16 @@ import './styles/global.css'
 function App() {
 
   const [currentPage, setCurrentPage] = useState('PaginaInicial');
+  const [confirm, setConfirm] = useState({titulo: '', pergunta: '', visivel: false, result: false});
 
   return (
     
     <BrowserRouter>
       <Context.Provider value={[
         currentPage,
-        setCurrentPage
+        setCurrentPage,
+        confirm,
+        setConfirm
       ]}>
         <ToastContainer />
         <main>
