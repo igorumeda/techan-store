@@ -1,6 +1,5 @@
-import { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
-import Context from '../../Context'
+import { useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 
 import logo from '../../assets/name-techan-white.png'
 import iconLogo from '../../assets/icon-techan-white.png'
@@ -10,7 +9,10 @@ import './styles.css'
 export default function Header(){
 
     const [statusMenu, setStatusMenu] = useState(false);
-    const [currentPage, setCurrentPage] = useContext(Context);
+
+    function navActive(isActive) {
+        return isActive ? 'bg-slate-800' : '';
+    }
 
     return(
         <div>
@@ -45,29 +47,29 @@ export default function Header(){
                         <h2>Menu</h2>
 
                         <ul>
-                            <li className={ currentPage === 'PaginaInicial' ? 'active' : '' }>
-                                <Link to={'/'} onClick={()=>{ setCurrentPage('PaginaInicial'); setStatusMenu(false); }} >
+                            <li>
+                                <NavLink to={'/'} className={({ isActive }) => navActive(isActive)} onClick={()=>{ setStatusMenu(false); }} >
                                     <MdHomeFilled size={20}/> 
                                     Página inicial
-                                </Link>
+                                </NavLink>
                             </li>
-                            <li className={ currentPage === 'Movimentacoes' ? 'active' : '' }>
-                                <Link to={'/movimentacoes'} onClick={()=>{ setCurrentPage('Movimentacoes'); setStatusMenu(false); }}>
+                            <li>
+                                <NavLink to={'/movimentacoes'} className={({ isActive }) => navActive(isActive)} onClick={()=>{ setStatusMenu(false); }}>
                                     <MdCompareArrows size={20} />
                                     Movimentações
-                                </Link>
+                                </NavLink>
                             </li>
-                            <li className={ currentPage === 'Clientes' ? 'active' : '' }>
-                                <Link to={'/clientes'} onClick={()=>{ setCurrentPage('Clientes'); setStatusMenu(false); }}>
+                            <li>
+                                <NavLink to={'/clientes'} className={({ isActive }) => navActive(isActive)} onClick={()=>{ setStatusMenu(false); }}>
                                     <MdGroup size={20} />
                                     Clientes
-                                </Link>
+                                </NavLink>
                             </li>
-                            <li className={ currentPage === 'Usuarios' ? 'active' : '' }>
-                                <Link to={'/usuarios'} onClick={()=>{ setCurrentPage('Usuarios'); setStatusMenu(false); }}>
+                            <li>
+                                <NavLink to={'/usuarios'} className={({ isActive }) => navActive(isActive)} onClick={()=>{ setStatusMenu(false); }}>
                                     <MdSupervisedUserCircle size={20} /> 
                                     Usuários
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
                                 <button>

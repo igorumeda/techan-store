@@ -1,9 +1,10 @@
-import { useState } from "react/cjs/react.development";
+import React from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 
-import Context from "./Context";
 import Header from "./components/Header";
 import Content from "./components/Content";
+import { EntityProvider } from './providers/Entity';
+import { ConfirmProvider } from './providers/Confirm';
 
 import Home from './pages/Home'
 import Clientes from './pages/Clientes'
@@ -17,33 +18,33 @@ import './styles/global.css'
 
 function App() {
 
-  const [currentPage, setCurrentPage] = useState('PaginaInicial');
-  const [confirm, setConfirm] = useState({titulo: '', pergunta: '', visivel: false, result: false});
-
   return (
+
+    <React.StrictMode>
     
-    <BrowserRouter>
-      <Context.Provider value={[
-        currentPage,
-        setCurrentPage,
-        confirm,
-        setConfirm
-      ]}>
-        <ToastContainer />
-        <main>
-          <Header />
-          <Content>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/clientes" element={<Clientes />} />
-                <Route path="/clientes/:id" element={<ClienteForm />} />
-                <Route path="/movimentacoes" element={<Movimentacoes />} />
-                <Route path="/usuarios" element={<Usuarios />} />
-              </Routes>
-          </Content>
-        </main>
-      </Context.Provider>
-    </BrowserRouter>
+      <BrowserRouter>
+        <EntityProvider>
+          <ConfirmProvider>
+            <ToastContainer />
+            <main>
+              <Header />
+              <Content>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/clientes" element={<Clientes />} />
+                    <Route path="/clientes/new" element={<ClienteForm />} />
+                    <Route path="/clientes/:id" element={<ClienteForm />} />
+                    <Route path="/clientes/edit/:id" element={<ClienteForm />} />
+                    <Route path="/movimentacoes" element={<Movimentacoes />} />
+                    <Route path="/usuarios" element={<Usuarios />} />
+                  </Routes>
+              </Content>
+            </main>
+          </ConfirmProvider>
+        </EntityProvider>
+      </BrowserRouter>
+
+    </React.StrictMode>
 
   );
 }

@@ -1,16 +1,19 @@
-import { useState, useEffect } from 'react';
-import api from '../../services/api'
-import { toast } from 'react-toastify';
-import { removeAcentos } from '../../services/global'
-import { MdSearch, MdEdit, MdDelete } from 'react-icons/md'
-
-import Title from '../../components/Title'
-import Loading from '../../components/Controls/Loading'
-
-import './styles.css'
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { MdSearch, MdEdit, MdDelete } from 'react-icons/md';
+import { toast } from 'react-toastify';
+
+import api from '../../services/api';
+import { removeAcentos } from '../../services/global';
+import EntityContext from '../../providers/Entity';
+import Title from '../../components/Title';
+import Loading from '../../components/Controls/Loading';
+
+import './styles.css';
 
 export default function Clientes(){
+
+    const { entity } = useContext(EntityContext);
 
     const [loading, setLoading] = useState(false);
     const [listaOriginal, setListaOriginal] = useState([]);
@@ -22,10 +25,10 @@ export default function Clientes(){
 
             setLoading(true);
     
-            await api.get('/cliente')
+            await api.get(`/cliente?entity=${entity}`)
                 .then(item => {
-                    setListaOriginal(item.data);
-                    setLista(item.data);
+                    setListaOriginal(item.data.rows);
+                    setLista(item.data.rows);
                     setLoading(false);
                 })
                 .catch(err => {
@@ -42,7 +45,6 @@ export default function Clientes(){
 
     function atualizaBusca(input){
 
-        let value = '';
         let param = removeAcentos(input).trim();
 
         if(param){
@@ -76,7 +78,7 @@ export default function Clientes(){
             <div className='contentData'>
 
                 <div className='boxClean'>
-                    <Link to='/clientes/1' className='btn'>Novo cliente</Link>
+                    <Link to='/clientes/new' className='btn'>Novo cliente</Link>
                 </div>
 
                 <div className='box filtro'>
@@ -97,34 +99,39 @@ export default function Clientes(){
                             </tr>
                         </thead>
                         <tbody>
-                            {lista.map((item, index) => {
-                                return(
-                                    <tr key={index}>
-                                        <td className='' data-label='CPF/CNPJ'>{item.nuCpfCnpj}</td>
-                                        <td className='' data-label='Nome'>{item.dsNome}</td>
-                                        <td className='' data-label='Email/Telefone'>
-                                            {item.dsEmail}<br/>
-                                            {item.nuTelefone}
-                                        </td>
-                                        <td className='right' data-label='#'>
-                                            <div className='block min-w-max'>
-                                                <button className='btn mr-1'>
-                                                    <MdSearch size={20} />
-                                                </button>
-                                                <button className='btn-edit mr-1'>
-                                                    <MdEdit size={20} />
-                                                </button>
-                                                <button className='btn-delete'>
-                                                    <MdDelete size={20} />
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                )
-                            })}
+                            {lista?.length > 0 ?
+                                lista.map((item, index) => {
+                                    return(
+                                        <tr key={index}>
+                                            <td className='' data-label='CPF/CNPJ'>{item.nuCpfCnpj}</td>
+                                            <td className='' data-label='Nome'>{item.dsNome}</td>
+                                            <td className='' data-label='Email/Telefone'>
+                                                {item.dsEmail}<br/>
+                                                {item.nuTelefone}
+                                            </td>
+                                            <td className='right'>
+                                                <div className='flex justify-end min-w-max'>
+                                                    <Link to={`/clientes/edit/${item.codigo}`} className='btn mr-1'>
+                                                        <MdSearch size={20} />
+                                                    </Link>
+                                                    <Link to={`/clientes/edit/${item.codigo}`} className='btn-edit mr-1'>
+                                                        <MdEdit size={20} />
+                                                    </Link>
+                                                    <button className='btn-delete'>
+                                                        <MdDelete size={20} />
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    )
+                                }) 
+                                :loading
+                                    ? <tr><td colSpan='3'><Loading /></td></tr> 
+                                    : <tr><td colSpan='3'><p className='obs p-2 text-left md:text-center'>Nenhum resultado encontrado</p></td></tr>
+                            }
                         </tbody>
                     </table>
-                    {loading ? <Loading /> : ''}
+                    
                 </div>
 
             </div>

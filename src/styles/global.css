@@ -69,6 +69,13 @@ code {
 
 
 
+.obs {
+  @apply text-gray-500 italic;
+}
+
+
+
+
 
 input[type='text'],
 textarea {
@@ -158,7 +165,7 @@ table.table-list tbody {
 }
 
 table.table-list tbody tr {
-  @apply flex flex-col items-end pb-5 mb-5 md:border-b md:table-row;
+  @apply flex flex-col justify-center items-end pb-5 mb-5 md:border-b md:table-row;
 }
 
 table.table-list tbody tr:last-child {

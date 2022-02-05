@@ -1,12 +1,12 @@
 import { useContext } from 'react'
-import Context from '../../Context'
+import { ConfirmContext } from '../../providers/Confirm';
 
 import { MdClose } from 'react-icons/md'
 import './styles.css'
 
 export default function Confirm(){
 
-    const [confirm, setConfirm] = useContext(Context);
+    const {confirm, setConfirm} = useContext(ConfirmContext);
 
     function confirmed(){
 
