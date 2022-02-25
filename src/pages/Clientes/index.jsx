@@ -111,13 +111,13 @@ export default function Clientes(){
                                             </td>
                                             <td className='right'>
                                                 <div className='flex justify-end min-w-max'>
-                                                    <Link to={`/clientes/edit/${item.codigo}`} className='btn mr-1'>
+                                                    <Link to={`/clientes/edit/${item.codigo}`} className='btn mr-1' title="Visualizar">
                                                         <MdSearch size={20} />
                                                     </Link>
-                                                    <Link to={`/clientes/edit/${item.codigo}`} className='btn-edit mr-1'>
+                                                    <Link to={`/clientes/edit/${item.codigo}`} className='btn-edit mr-1' title="Editar">
                                                         <MdEdit size={20} />
                                                     </Link>
-                                                    <button className='btn-delete'>
+                                                    <button className='btn-delete' title="Excluir">
                                                         <MdDelete size={20} />
                                                     </button>
                                                 </div>

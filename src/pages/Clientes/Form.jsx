@@ -10,22 +10,25 @@ import { MdArrowBack } from 'react-icons/md'
 import { toast } from 'react-toastify'
 
 import api from '../../services/api'
+import { prepareValueToSave } from '../../services/global'
 import { MaskInput } from '../../components/Controls/MaskInput'
 import Title from '../../components/Title'
 import Confirm from '../../components/Controls/Confirm'
 import Loading from '../../components/Controls/Loading'
+
 import './styles.css'
 
 export default function ClienteForm(props){
 
-    const codigo = useParams();
+    const { id } = useParams();
+    const navigate = useNavigate();
     const { pathname } = useLocation();
     const mode = pathname.split('/')[2];
 
-    const navigate = useNavigate();
     const { entity } = useContext(EntityContext);
-    const { confirm, setConfirm } = useContext(ConfirmContext); 
+    const { confirm, setConfirm } = useContext(ConfirmContext);
     const [loading, setLoading] = useState(false);
+    const [loadingBtn, setLoadingBtn] = useState(false);
 
     const [nuCpfCnpj, setNuCpfCnpj] = useState('');
     const [dsNome, setDsNome] = useState('');
@@ -40,6 +43,12 @@ export default function ClienteForm(props){
     const [dsCidade, setDsCidade] = useState('');
     const [dsUf, setDsUf] = useState('');
     const [dsComplemento, setDsComplemento] = useState('');
+
+    useEffect(()=>{
+        if(id > 0 || id !== undefined){
+            loadForm();
+        }
+    }, [])
 
     useEffect(()=>{
         
@@ -68,18 +77,51 @@ export default function ClienteForm(props){
 
     }, [setConfirm]);
 
+    async function loadForm(){
+
+        setLoading(true);
+
+        await api.get(`/cliente?entity=${entity}&filter=codigo:${id}`)
+        .then(item => {
+
+            let data = prepareValueToSave( item.data.rows[0] );
+            setNuCpfCnpj(data.nuCpfCnpj);
+            setDsNome(data.dsNome);
+            setDsNomeFantasia(data.dsNomeFantasia);
+            setDsEmail(data.dsEmail);
+            setNuTelefone(data.nuTelefone);
+            setNuCelular(data.nuCelular);
+            setFlWhatsapp(data.flWhatsapp);
+            setNuCep(data.nuCep);
+            setDsEndereco(data.dsEndereco);
+            setDsBairro(data.dsBairro);
+            setDsCidade(data.dsCidade);
+            setDsUf(data.dsUf);
+            setDsComplemento(data.dsComplemento);
+
+            setLoading(false);
+
+        })
+        .catch(err => {
+            console.log(err);
+            toast.error('Algo deu errado');
+            setLoading(false);
+        })
+
+    }
+
     async function handleAdd(data){
         
         await api.post('/cliente', data)
             .then(() => {
-                toast.success('Cliente salvo com sucesso')
-                setLoading(false);
+                toast.success('Cliente salvo com sucesso');
+                setLoadingBtn(false);
                 navigate(-1);
             })
             .catch(err => {
                 console.log(err);
                 toast.error('Algo deu errado');
-                setLoading(false);
+                setLoadingBtn(false);
             })
 
     }
@@ -89,14 +131,35 @@ export default function ClienteForm(props){
         await api.put('/cliente', data)
             .then(() => {
                 toast.success('Cliente salvo com sucesso')
-                setLoading(false);
+                setLoadingBtn(false);
                 navigate(-1);
             })
             .catch(err => {
                 console.log(err);
                 toast.error('Algo deu errado');
-                setLoading(false);
+                setLoadingBtn(false);
             })
+
+    }
+
+    async function getAddress(cep){
+
+        if(cep !== ''){
+
+            api.get(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(item => {
+                    
+                    setDsEndereco(item.data.logradouro);
+                    setDsBairro(item.data.bairro);
+                    setDsCidade(item.data.localidade);
+                    setDsUf(item.data.uf);
+
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+
+        }
 
     }
 
@@ -104,7 +167,7 @@ export default function ClienteForm(props){
 
         e.preventDefault();
 
-        setLoading(true);
+        setLoadingBtn(true);
 
         let campos = {
             nuCpfCnpj:      nuCpfCnpj,
@@ -146,98 +209,102 @@ export default function ClienteForm(props){
             <div className='contentData'>
 
                 <div className='box'>
-                    
-                    <form onSubmit={handleSubmit}>
 
-                        <table className='table-form'>
-                            <tbody>
+                    {loading ? 
+                        <Loading />
+                    :
+                        <form onSubmit={handleSubmit}>
 
-                                <tr>
-                                    <td>
-                                        <label>CPF / CNPJ</label>
-                                        <MaskInput name='cpfCnpj' value={nuCpfCnpj} onChange={(e) => setNuCpfCnpj(e.target.value)} />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colSpan='3'>
-                                        <label>Nome</label>
-                                        <input type='text' value={dsNome} onChange={(e) => setDsNome(e.target.value)} />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colSpan='3'>
-                                        <label>Apelido / Nome Fantasia</label>
-                                        <input type='text' value={dsNomeFantasia} onChange={(e) => setDsNomeFantasia(e.target.value)} />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colSpan='3'>
-                                        <label>Email</label>
-                                        <input type='text' value={dsEmail} onChange={(e) => setDsEmail(e.target.value)} />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>Telefone</label>
-                                        <MaskInput type='text' name='telefone' value={nuTelefone} onChange={(e) => setNuTelefone(e.target.value)} />
-                                    </td>
-                                    <td>
-                                        <label>Celular</label>
-                                        <MaskInput type='text' name='celular' value={nuCelular} onChange={(e) => setNuCelular(e.target.value)} />
-                                    </td>
-                                    <td>
-                                        <label>Celular é Whatsapp?</label>
-                                        <div>
-                                            <Switch checked={flWhatsapp} onChange={setFlWhatsapp} className={`${flWhatsapp ? 'bg-slate-600' : 'bg-gray-200'} relative inline-flex items-center h-6 rounded-full w-11`}>
-                                                <span className="sr-only">Enable notifications</span>
-                                                <span className={`${ flWhatsapp ? 'translate-x-6' : 'translate-x-1' } inline-block w-4 h-4 transform bg-white rounded-full transition-all`} />
-                                            </Switch>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>CEP</label>
-                                        <MaskInput type='text' name='cep' value={nuCep} onChange={(e) => setNuCep(e.target.value)} />
-                                        <a href="#" className='text-sky-700'> Não sei meu CEP </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colSpan="3">
-                                        <label>Endereço</label>
-                                        <input type='text' value={dsEndereco} onChange={(e) => setDsEndereco(e.target.value)} />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>Bairro</label>
-                                        <input type='text' value={dsBairro} onChange={(e) => setDsBairro(e.target.value)} />
-                                    </td>
-                                    <td>
-                                        <label>Cidade</label>
-                                        <input type='text' value={dsCidade} onChange={(e) => setDsCidade(e.target.value)} />
-                                    </td>
-                                    <td>
-                                        <label>UF</label>
-                                        <input type='text' value={dsUf} onChange={(e) => setDsUf(e.target.value)} />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colSpan="3" >
-                                        <label>Complemento</label>
-                                        <input type='text' value={dsComplemento} onChange={(e) => setDsComplemento(e.target.value)} />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colSpan='3'>
-                                        {loading ? <Loading /> : <button type='submit' onSubmit={handleSubmit} className='btn'>Salvar</button> }
-                                    </td>
-                                </tr>
+                            <table className='table-form'>
+                                <tbody>
 
-                            </tbody>
-                        </table>
+                                    <tr>
+                                        <td>
+                                            <label>CPF / CNPJ</label>
+                                            <MaskInput name='cpfCnpj' value={nuCpfCnpj} onChange={(e) => setNuCpfCnpj(e.target.value)} />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan='3'>
+                                            <label>Nome</label>
+                                            <input type='text' value={dsNome} onChange={(e) => setDsNome(e.target.value)} />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan='3'>
+                                            <label>Apelido / Nome Fantasia</label>
+                                            <input type='number' value={dsNomeFantasia} onChange={(e) => setDsNomeFantasia(e.target.value)} />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan='3'>
+                                            <label>Email</label>
+                                            <input type='text' value={dsEmail} onChange={(e) => setDsEmail(e.target.value)} />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>Telefone</label>
+                                            <MaskInput type='text' name='telefone' value={nuTelefone} onChange={(e) => setNuTelefone(e.target.value)} />
+                                        </td>
+                                        <td>
+                                            <label>Celular</label>
+                                            <MaskInput type='text' name='celular' value={nuCelular} onChange={(e) => setNuCelular(e.target.value)} />
+                                        </td>
+                                        <td>
+                                            <label>Celular é Whatsapp?</label>
+                                            <div>
+                                                <Switch checked={flWhatsapp} onChange={setFlWhatsapp} className={`${flWhatsapp ? 'bg-slate-600' : 'bg-gray-200'} relative inline-flex items-center h-6 rounded-full w-11`}>
+                                                    <span className="sr-only">Enable notifications</span>
+                                                    <span className={`${ flWhatsapp ? 'translate-x-6' : 'translate-x-1' } inline-block w-4 h-4 transform bg-white rounded-full transition-all`} />
+                                                </Switch>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>CEP</label>
+                                            <MaskInput type='text' name='cep' value={nuCep} onChange={(e) => setNuCep(e.target.value)} onBlur={(e) => getAddress(e.target.value)} />
+                                            <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="blank" className='text-sky-700'> Não sei meu CEP </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan="3">
+                                            <label>Endereço</label>
+                                            <input type='text' value={dsEndereco} onChange={(e) => setDsEndereco(e.target.value)} />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label>Bairro</label>
+                                            <input type='text' value={dsBairro} onChange={(e) => setDsBairro(e.target.value)} />
+                                        </td>
+                                        <td>
+                                            <label>Cidade</label>
+                                            <input type='text' value={dsCidade} onChange={(e) => setDsCidade(e.target.value)} />
+                                        </td>
+                                        <td>
+                                            <label>UF</label>
+                                            <input type='text' value={dsUf} onChange={(e) => setDsUf(e.target.value)} />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan="3" >
+                                            <label>Complemento</label>
+                                            <input type='text' value={dsComplemento} onChange={(e) => setDsComplemento(e.target.value)} />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan='3'>
+                                            {loadingBtn ? <Loading /> : <button type='submit' onSubmit={handleSubmit} className='btn'>Salvar</button> }
+                                        </td>
+                                    </tr>
 
-                    </form>
+                                </tbody>
+                            </table>
+
+                        </form>
+                    }
 
                 </div>
 
